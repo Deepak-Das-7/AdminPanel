@@ -1,10 +1,11 @@
 // src/pages/Customers.tsx
 import AdminLayout from "../layout/AdminLayout";
 import { useState } from "react";
-import { Pencil, Trash2 } from "lucide-react";
+import { Pencil, Trash2, Plus } from "lucide-react";
 import customersData from "../data/user.json";
 import SearchBar from "../components/SearchBar";
 import Pagination from "../components/Pagination";
+import CustomerModal from "../components/CustomerModal";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -12,6 +13,9 @@ const Customers = () => {
     const [customers, setCustomers] = useState(customersData);
     const [currentPage, setCurrentPage] = useState(1);
     const [searchTerm, setSearchTerm] = useState("");
+    const [showModal, setShowModal] = useState(false);
+    const [modalMode, setModalMode] = useState<"add" | "edit">("add");
+    const [selectedCustomer, setSelectedCustomer] = useState<any | null>(null);
 
     const handleDelete = (id: string) => {
         if (window.confirm("Are you sure you want to delete this customer?")) {
@@ -20,13 +24,32 @@ const Customers = () => {
     };
 
     const handleEdit = (id: string) => {
-        alert(`Edit customer with ID: ${id}`);
+        const cust = customers.find((c) => c.id === id);
+        if (cust) {
+            setSelectedCustomer(cust);
+            setModalMode("edit");
+            setShowModal(true);
+        }
+    };
+
+    const handleAddCustomer = (data: any) => {
+        setCustomers((prev) => [...prev, { ...data, id: crypto.randomUUID() }]);
+    };
+
+    const handleUpdateCustomer = (updatedData: any) => {
+        setCustomers((prev) =>
+            prev.map((c) => (c.id === updatedData.id ? updatedData : c))
+        );
+    };
+
+    const openAddModal = () => {
+        setSelectedCustomer(null);
+        setModalMode("add");
+        setShowModal(true);
     };
 
     const filteredCustomers = customers.filter((cust) =>
-        `${cust.name} ${cust.email} ${cust.phone}`
-            .toLowerCase()
-            .includes(searchTerm.toLowerCase())
+        `${cust.name} ${cust.email} ${cust.phone}`.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     const totalPages = Math.ceil(filteredCustomers.length / ITEMS_PER_PAGE);
@@ -38,11 +61,18 @@ const Customers = () => {
     return (
         <AdminLayout>
             <div>
-                {/* Search Bar */}
-                <SearchBar searchTerm={searchTerm} onSearch={setSearchTerm} />
+                <div className="flex justify-between items-center mb-4">
+                    <SearchBar searchTerm={searchTerm} onSearch={setSearchTerm} />
+                    <button
+                        onClick={openAddModal}
+                        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center gap-2"
+                    >
+                        <Plus size={16} /> Add Customer
+                    </button>
+                </div>
 
                 {/* Table */}
-                <div className="overflow-x-auto shadow border border-gray-200 bg-white mt-4">
+                <div className="overflow-x-auto shadow border border-gray-200 bg-white">
                     <table className="min-w-full text-sm text-gray-700">
                         <thead className="bg-gray-100 text-xs uppercase">
                             <tr>
@@ -94,6 +124,14 @@ const Customers = () => {
                     totalPages={totalPages}
                     currentPage={currentPage}
                     onPageChange={setCurrentPage}
+                />
+
+                {/* Modal */}
+                <CustomerModal
+                    isOpen={showModal}
+                    onClose={() => setShowModal(false)}
+                    onSubmit={modalMode === "add" ? handleAddCustomer : handleUpdateCustomer}
+                    initialData={modalMode === "edit" ? selectedCustomer : null}
                 />
             </div>
         </AdminLayout>
