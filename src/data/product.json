@@ -1,0 +1,107 @@
+[
+  {
+    "id": "1",
+    "name": "Apple iPhone 14",
+    "category": "Electronics",
+    "price": 999,
+    "stock": 25
+  },
+  {
+    "id": "2",
+    "name": "Samsung Galaxy S23",
+    "category": "Electronics",
+    "price": 850,
+    "stock": 30
+  },
+  {
+    "id": "3",
+    "name": "Dell XPS 13",
+    "category": "Computers",
+    "price": 1200,
+    "stock": 12
+  },
+  {
+    "id": "4",
+    "name": "Sony WH-1000XM5 Headphones",
+    "category": "Accessories",
+    "price": 350,
+    "stock": 15
+  },
+  {
+    "id": "5",
+    "name": "Nike Air Max 270",
+    "category": "Fashion",
+    "price": 150,
+    "stock": 50
+  },
+  {
+    "id": "6",
+    "name": "Samsung 65\" QLED TV",
+    "category": "Electronics",
+    "price": 1500,
+    "stock": 5
+  },
+  {
+    "id": "7",
+    "name": "Apple MacBook Pro 16\"",
+    "category": "Computers",
+    "price": 2800,
+    "stock": 8
+  },
+  {
+    "id": "8",
+    "name": "Bose QuietComfort 45",
+    "category": "Accessories",
+    "price": 300,
+    "stock": 25
+  },
+  {
+    "id": "9",
+    "name": "Sony PlayStation 5",
+    "category": "Gaming",
+    "price": 500,
+    "stock": 20
+  },
+  {
+    "id": "10",
+    "name": "GoPro HERO 10",
+    "category": "Accessories",
+    "price": 400,
+    "stock": 12
+  },
+  {
+    "id": "11",
+    "name": "LG OLED 48\" TV",
+    "category": "Electronics",
+    "price": 1300,
+    "stock": 10
+  },
+  {
+    "id": "12",
+    "name": "Asus ROG Strix G15",
+    "category": "Computers",
+    "price": 1500,
+    "stock": 7
+  },
+  {
+    "id": "13",
+    "name": "Google Pixel 7 Pro",
+    "category": "Electronics",
+    "price": 900,
+    "stock": 18
+  },
+  {
+    "id": "14",
+    "name": "Xbox Series X",
+    "category": "Gaming",
+    "price": 500,
+    "stock": 22
+  },
+  {
+    "id": "15",
+    "name": "JBL Flip 5 Bluetooth Speaker",
+    "category": "Accessories",
+    "price": 120,
+    "stock": 40
+  }
+]
